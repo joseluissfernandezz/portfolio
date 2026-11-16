@@ -483,7 +483,12 @@ svg.fill { fill: currentColor; stroke: none; }
 .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
 .field input:focus + label, .field input:not(:placeholder-shown) + label,
 .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 6px; font-size: 12px; color: var(--accent); }
-.form__status { min-height: 1.4em; margin: 0; font-size: 14px; color: var(--accent); }
+.form__status { min-height: 1.4em; margin: 0; font-size: 14px; color: var(--muted); }
+.form__status[data-kind="ok"] { color: var(--accent); }
+.form__status[data-kind="error"] { color: #f87171; }
+.form__status a { color: var(--text); text-decoration: underline; }
+.form .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: 14px; }

@@ -196,33 +196,44 @@
   });
 
   /* ---------------- Formulario ----------------
-     En Netlify se envía con Netlify Forms (data-netlify).
-     En local (sin Netlify) abre el cliente de correo como alternativa. */
+     Envía a la API propia /api/contact (guarda en Netlify Blobs + aviso por email).
+     Si la API no está disponible (p. ej. en local), ofrece el cliente de correo. */
   const form = $('#contact-form');
   const status = $('#form-status');
+  const submitBtn = form.querySelector('[type="submit"]');
+  const setStatus = (msg, kind = '') => { status.textContent = msg; status.dataset.kind = kind; };
+  const mailtoHref = data => `mailto:joseluiscanrull@gmail.com?subject=${encodeURIComponent('Portfolio · ' + data.name)}&body=${encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`)}`;
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const data = new FormData(form);
-    const onNetlify = /netlify\.app$/.test(location.hostname) || form.dataset.forceNetlify;
-    if (!onNetlify) {
-      const body = encodeURIComponent(`${data.get('message')}\n\n— ${data.get('name')} (${data.get('email')})`);
-      status.textContent = t('form.mailto');
-      location.href = `mailto:joseluiscanrull@gmail.com?subject=${encodeURIComponent('Portfolio · ' + data.get('name'))}&body=${body}`;
-      return;
-    }
-    status.textContent = t('form.sending');
+    const data = Object.fromEntries(new FormData(form));
+    data.name = (data.name || '').trim(); data.email = (data.email || '').trim(); data.message = (data.message || '').trim();
+
+    // Validación en cliente (el servidor vuelve a validar)
+    if (data.name.length < 2) return setStatus(t('form.err_name'), 'error'), $('#f-name').focus();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) return setStatus(t('form.err_email'), 'error'), $('#f-email').focus();
+    if (data.message.length < 10) return setStatus(t('form.err_msg'), 'error'), $('#f-msg').focus();
+
+    setStatus(t('form.sending'));
+    submitBtn.disabled = true;
     try {
-      const res = await fetch('/', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       });
+      const isJson = (res.headers.get('content-type') || '').includes('application/json');
+      if (!isJson) throw Object.assign(new Error('no-api'), { noApi: true });
+      if (res.status === 429) return setStatus(t('form.err_rate'), 'error');
       if (!res.ok) throw new Error(res.status);
       form.reset();
-      status.textContent = t('form.ok');
-    } catch {
-      status.textContent = '';
-      form.submit();
+      setStatus(t('form.ok'), 'ok');
+      showToast(t('form.ok'));
+    } catch (err) {
+      status.dataset.kind = 'error';
+      status.innerHTML = `${t('form.err_send')} <a href="${mailtoHref(data)}">${t('form.err_mailto')}</a>`;
+    } finally {
+      submitBtn.disabled = false;
     }
   });
 

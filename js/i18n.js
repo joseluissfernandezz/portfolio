@@ -132,6 +132,12 @@ window.I18N_EN = {
   "form.sending": "Sending…",
   "form.ok": "Thanks! Your message has been sent.",
   "form.mailto": "Opening your email app…",
+  "form.err_name": "Please enter your name.",
+  "form.err_email": "That email doesn't look valid.",
+  "form.err_msg": "The message must be at least 10 characters.",
+  "form.err_rate": "Too many messages in a row. Please try again in a few minutes.",
+  "form.err_send": "The message couldn't be sent.",
+  "form.err_mailto": "Send it from your email app",
   "footer.made": "Hand-crafted with HTML, CSS and JavaScript"
 };
 
@@ -142,6 +148,12 @@ window.I18N_ES_EXTRA = {
   "form.sending": "Enviando…",
   "form.ok": "¡Gracias! Tu mensaje se ha enviado.",
   "form.mailto": "Abriendo tu aplicación de correo…",
+  "form.err_name": "Escribe tu nombre.",
+  "form.err_email": "Ese email no parece válido.",
+  "form.err_msg": "El mensaje debe tener al menos 10 caracteres.",
+  "form.err_rate": "Demasiados mensajes seguidos. Prueba de nuevo en unos minutos.",
+  "form.err_send": "No se pudo enviar el mensaje.",
+  "form.err_mailto": "Envíalo desde tu correo",
   "live.demo": "Modo demo · localStorage",
   "live.empty": "Aún no hay marcas. ¡Sé el primero!",
   "live.error": "No se pudieron cargar los datos.",
