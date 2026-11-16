@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-joseluis",
+  "private": true,
+  "type": "module",
+  "description": "Portfolio de José Luis Fernández · sitio estático + Netlify Functions + Netlify Database (PostgreSQL)",
+  "dependencies": {
+    "@netlify/database": "^2.0.3"
+  }
+}

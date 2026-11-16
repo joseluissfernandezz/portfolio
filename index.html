@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>José Luis Fernández · Java Backend Developer</title>
+  <meta name="description" content="Portfolio de José Luis Fernández Solís, desarrollador backend Java (Spring Boot, SQL Server, JDBC) en Sabadell, Barcelona." />
+  <meta name="theme-color" content="#0b0f17" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="José Luis Fernández · Java Backend Developer" />
+  <meta property="og:description" content="Backend Java & SQL. ERP contable y fiscal, Spring Boot, SQL Server." />
+  <meta property="og:image" content="assets/img/profile.jpg" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Aplica tema e idioma guardados antes de pintar (evita parpadeo)
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "José Luis Fernández Solís",
+    "jobTitle": "Java Backend Developer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Sabadell", "addressRegion": "Barcelona", "addressCountry": "ES" },
+    "sameAs": ["https://www.linkedin.com/in/joseluisfernandezsolis/", "https://gitlab.com/personal-projects4020123"],
+    "knowsAbout": ["Java", "Spring Boot", "SQL Server", "JDBC", "Hibernate", "Git"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#inicio" class="logo" aria-label="Inicio">
+        <span class="logo__mark">JL</span><span class="logo__text">fernandez<span class="accent">.dev</span></span>
+      </a>
+
+      <nav class="nav__links" id="nav-links" aria-label="Principal">
+        <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+        <a href="#experiencia" data-i18n="nav.exp">Experiencia</a>
+        <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#playground" data-i18n="nav.play">Playground</a>
+        <a href="#contacto" class="nav__cta" data-i18n="nav.contact">Contacto</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="lang-toggle" type="button" aria-label="Cambiar idioma / Change language">
+          <span class="lang-label">EN</span>
+        </button>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Cambiar tema">
+          <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn burger" id="burger" type="button" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow reveal"><span class="dot"></span><span data-i18n="hero.eyebrow">Sabadell, Barcelona · Backend Developer</span></p>
+          <h1 class="hero__title reveal">
+            <span data-i18n="hero.hi">Hola, soy</span><br />
+            <span class="gradient-text">José Luis Fernández</span>
+          </h1>
+          <p class="hero__role reveal">
+            <span class="mono">&gt;</span> <span id="typed" class="mono typed"></span><span class="caret" aria-hidden="true"></span>
+          </p>
+          <p class="hero__lead reveal" data-i18n="hero.lead">
+            Desarrollo backend en <strong>Java</strong> y <strong>SQL</strong> para software de gestión real: un ERP contable y fiscal con modelos tributarios que pasan los validadores oficiales.
+          </p>
+          <div class="hero__cta reveal">
+            <a href="#proyectos" class="btn btn--primary" data-i18n="hero.cta1">Ver proyectos</a>
+            <a href="cv.html" class="btn btn--ghost">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+              <span data-i18n="hero.cta2">Ver CV</span>
+            </a>
+            <a href="cv.html#jugar" class="btn btn--game">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3M15.5 12h.01M18 13.5h.01"/></svg>
+              <span data-i18n="hero.cta3">CV en 3D</span>
+            </a>
+          </div>
+          <ul class="hero__social reveal" aria-label="Redes">
+            <li><a href="https://www.linkedin.com/in/joseluisfernandezsolis/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="fill"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a></li>
+            <li><a href="https://gitlab.com/personal-projects4020123" target="_blank" rel="noopener" aria-label="GitLab">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="fill"><path d="m23.6 9.6-.03-.09-3.27-8.53a.85.85 0 0 0-1.62.06l-2.2 6.75H7.52L5.32 1.04a.85.85 0 0 0-1.62-.06L.43 9.5.4 9.6a6.07 6.07 0 0 0 2.01 7.01l.01.01.03.02 4.98 3.73 2.46 1.86 1.5 1.13a1.01 1.01 0 0 0 1.22 0l1.5-1.13 2.46-1.86 5.01-3.75.01-.01a6.07 6.07 0 0 0 2.01-7.01z"/></svg></a></li>
+            <li><a href="mailto:joseluiscanrull@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="avatar">
+            <div class="avatar__ring"></div>
+            <img src="assets/img/profile.jpg" alt="José Luis Fernández" width="320" height="320" />
+            <span class="avatar__badge"><span class="pulse"></span><span data-i18n="hero.badge">Java · SQL · Spring</span></span>
+          </div>
+          <div class="code-card" aria-hidden="true">
+            <div class="code-card__bar"><i></i><i></i><i></i><span>Developer.java</span></div>
+<pre><code><span class="k">public record</span> <span class="t">Developer</span>(
+    <span class="t">String</span> name,
+    <span class="t">List</span>&lt;<span class="t">String</span>&gt; stack
+) {
+  <span class="k">static</span> <span class="t">Developer</span> <span class="f">me</span>() {
+    <span class="k">return new</span> <span class="t">Developer</span>(
+      <span class="s">"José Luis"</span>,
+      <span class="t">List</span>.<span class="f">of</span>(<span class="s">"Java"</span>, <span class="s">"SQL"</span>, <span class="s">"Spring"</span>)
+    );
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="stats">
+          <li class="stat reveal"><strong data-count="2">0</strong><span data-i18n="stats.years">años de experiencia backend</span></li>
+          <li class="stat reveal"><strong data-count="2">0</strong><span data-i18n="stats.companies">empresas de software</span></li>
+          <li class="stat reveal"><strong data-count="15" data-suffix="+">0</strong><span data-i18n="stats.tech">tecnologías utilizadas</span></li>
+          <li class="stat reveal"><strong data-count="3">0</strong><span data-i18n="stats.langs">idiomas (ES · CA · EN)</span></li>
+        </ul>
+      </div>
+      <a href="#sobre-mi" class="scroll-hint" aria-label="Bajar"><span></span></a>
+    </section>
+
+    <!-- ============ SOBRE MÍ ============ -->
+    <section class="section" id="sobre-mi">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">01</span>
+          <h2 data-i18n="about.title">Sobre mí</h2>
+        </header>
+        <div class="about">
+          <div class="about__text reveal">
+            <p data-i18n="about.p1">Soy desarrollador backend con <strong>2 años de experiencia</strong> en Java y SQL. Me formé como <strong>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</strong>, especializado en videojuegos y ocio digital.</p>
+            <p data-i18n="about.p2">Hoy trabajo en un <strong>ERP contable y fiscal</strong>: desarrollo modelos tributarios estatales y forales, optimizo consultas en SQL Server y genero informes con JasperReports, siempre validando el resultado con las herramientas oficiales.</p>
+            <p data-i18n="about.p3">Me gusta entender el problema de fondo antes de escribir código, cuidar los detalles y aprender rápido. Uso IA (Claude) a diario como herramienta de desarrollo.</p>
+          </div>
+          <ul class="traits reveal">
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.1">Resolución de problemas</span></li>
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.2">Pensamiento analítico</span></li>
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.3">Atención al detalle</span></li>
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.4">Trabajo en equipo (SCRUM)</span></li>
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.5">Aprendizaje rápido</span></li>
+            <li><span class="trait__icon">◆</span><span data-i18n="trait.6">Desarrollo asistido por IA</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCIA ============ -->
+    <section class="section" id="experiencia">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">02</span>
+          <h2 data-i18n="exp.title">Experiencia y formación</h2>
+        </header>
+
+        <div class="tabs reveal" role="tablist" aria-label="Experiencia o formación">
+          <button role="tab" class="tab is-active" aria-selected="true" aria-controls="panel-work" id="tab-work" data-i18n="exp.tab1">Experiencia</button>
+          <button role="tab" class="tab" aria-selected="false" aria-controls="panel-edu" id="tab-edu" data-i18n="exp.tab2">Formación</button>
+        </div>
+
+        <ol class="timeline" id="panel-work" role="tabpanel" aria-labelledby="tab-work">
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="exp.g.date">Ene 2026 — Actualidad</span></div>
+            <div class="tl-card">
+              <h3 data-i18n="exp.g.role">Desarrollador Backend</h3>
+              <p class="tl-card__org">Geyce Software</p>
+              <ul>
+                <li data-i18n="exp.g.1">Desarrollo backend en Java para un ERP contable y fiscal.</li>
+                <li data-i18n="exp.g.2">Modelos tributarios estatales y forales validados con las herramientas oficiales.</li>
+                <li data-i18n="exp.g.3">Consultas y optimización en SQL Server mediante JDBC.</li>
+                <li data-i18n="exp.g.4">Informes con JasperReports; control de versiones con Git y SVN.</li>
+                <li data-i18n="exp.g.5">Equipo SCRUM; desarrollo diario asistido por IA con Claude.</li>
+              </ul>
+              <div class="chips"><span>Java</span><span>SQL Server</span><span>JDBC</span><span>JasperReports</span><span>Git</span><span>SVN</span></div>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="exp.m.date">Jun 2024 — Jun 2025</span></div>
+            <div class="tl-card">
+              <h3 data-i18n="exp.m.role">Desarrollador Backend</h3>
+              <p class="tl-card__org">MGA Games</p>
+              <ul>
+                <li data-i18n="exp.m.1">Depuración y resolución de incidencias backend en Java.</li>
+                <li data-i18n="exp.m.2">Escritura y optimización de consultas SQL para la gestión de premios.</li>
+                <li data-i18n="exp.m.3">Documentación técnica e integración continua.</li>
+                <li data-i18n="exp.m.4">Pruebas de rendimiento y estabilidad de las aplicaciones.</li>
+              </ul>
+              <div class="chips"><span>Java</span><span>SQL</span><span>CI</span><span>Testing</span></div>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="exp.c.date">Nov 2022 — Abr 2023</span></div>
+            <div class="tl-card tl-card--small">
+              <h3 data-i18n="exp.tech">Técnico informático</h3>
+              <p class="tl-card__org">Escola Creu Alta</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="exp.j.date">Oct 2021 — Feb 2022</span></div>
+            <div class="tl-card tl-card--small">
+              <h3 data-i18n="exp.tech">Técnico informático</h3>
+              <p class="tl-card__org">Institut Jonqueres</p>
+            </div>
+          </li>
+        </ol>
+
+        <ol class="timeline" id="panel-edu" role="tabpanel" aria-labelledby="tab-edu" hidden>
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="edu.d.date">Sep 2023 — Jun 2025</span></div>
+            <div class="tl-card">
+              <h3>CFGS DAMvi</h3>
+              <p class="tl-card__org" data-i18n="edu.d.name">Desarrollo de Aplicaciones Multiplataforma, perfil Videojuegos y Ocio Digital</p>
+              <div class="chips"><span>Java</span><span>Spring</span><span>Hibernate</span><span>C#</span><span>Python</span><span>Angular</span><span>Laravel</span></div>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-item__date"><span data-i18n="edu.s.date">Sep 2020 — May 2023</span></div>
+            <div class="tl-card">
+              <h3>CFGM SMX</h3>
+              <p class="tl-card__org" data-i18n="edu.s.name">Sistemas Microinformáticos y Redes</p>
+              <div class="chips"><span data-i18n="edu.s.c1">Redes</span><span data-i18n="edu.s.c2">Sistemas</span><span data-i18n="edu.s.c3">Hardware</span></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PROYECTOS ============ -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">03</span>
+          <h2 data-i18n="proj.title">Proyectos</h2>
+        </header>
+
+        <div class="filters reveal" role="group" aria-label="Filtrar proyectos">
+          <button class="filter is-active" data-filter="all" data-i18n="proj.f.all">Todos</button>
+          <button class="filter" data-filter="backend">Backend</button>
+          <button class="filter" data-filter="web">Web</button>
+          <button class="filter" data-filter="games" data-i18n="proj.f.games">Videojuegos</button>
+        </div>
+
+        <div class="projects">
+          <article class="project project--featured reveal" data-tags="backend">
+            <div class="project__media project__media--erp" aria-hidden="true">
+              <div class="erp-mock">
+                <div class="erp-mock__row"><span>303</span><i style="--w:82%"></i><b>OK</b></div>
+                <div class="erp-mock__row"><span>347</span><i style="--w:64%"></i><b>OK</b></div>
+                <div class="erp-mock__row"><span>349</span><i style="--w:91%"></i><b>OK</b></div>
+                <div class="erp-mock__row"><span>190</span><i style="--w:55%"></i><b>OK</b></div>
+                <div class="erp-mock__row"><span>115</span><i style="--w:73%"></i><b>OK</b></div>
+              </div>
+            </div>
+            <div class="project__body">
+              <span class="project__kicker" data-i18n="proj.erp.kicker">Experiencia profesional</span>
+              <h3 data-i18n="proj.erp.title">Modelos tributarios en un ERP fiscal</h3>
+              <p data-i18n="proj.erp.desc">Generación de declaraciones fiscales estatales y forales (Navarra, Bizkaia, Álava): cálculo a partir de la contabilidad, pantallas de gestión, fichero oficial y validación contra los validadores de cada hacienda.</p>
+              <div class="chips"><span>Java</span><span>SQL Server</span><span>JDBC</span><span>JasperReports</span></div>
+              <p class="project__note" data-i18n="proj.erp.note">Código privado de empresa</p>
+            </div>
+          </article>
+
+          <article class="project reveal" data-tags="games">
+            <div class="project__media"><img src="assets/img/project-tfg.png" alt="Logo de The New Demon King" loading="lazy" /></div>
+            <div class="project__body">
+              <span class="project__kicker" data-i18n="proj.tfg.kicker">Proyecto final · CFGS DAMvi</span>
+              <h3>The New Demon King</h3>
+              <p data-i18n="proj.tfg.desc">Proyecto final del ciclo de Desarrollo de Aplicaciones Multiplataforma, especialidad en Videojuegos y Ocio Digital.</p>
+              <div class="chips"><span>Game Dev</span><span data-i18n="proj.tfg.chip">Proyecto final</span></div>
+              <a class="project__link" href="https://gitlab.com/personal-projects4020123/cfgs-final-project/-/tree/main?ref_type=heads" target="_blank" rel="noopener"><span data-i18n="proj.view">Ver repositorio</span> →</a>
+            </div>
+          </article>
+
+          <article class="project reveal" data-tags="backend games">
+            <div class="project__media project__media--cards" aria-hidden="true">
+              <div class="pcard pcard--1">♠</div><div class="pcard pcard--2">♥</div><div class="pcard pcard--3">♦</div>
+            </div>
+            <div class="project__body">
+              <span class="project__kicker" data-i18n="proj.card.kicker">Proyecto académico</span>
+              <h3 data-i18n="proj.card.title">Juego de cartas con backend</h3>
+              <p data-i18n="proj.card.desc">Juego de cartas cuyo backend gestiona jugadores y partidas con persistencia en base de datos mediante Spring e Hibernate.</p>
+              <div class="chips"><span>Java</span><span>Spring</span><span>Hibernate</span></div>
+            </div>
+          </article>
+
+          <article class="project reveal" data-tags="web backend">
+            <div class="project__media project__media--lms" aria-hidden="true">
+              <div class="lms"><b></b><i></i><i></i><i class="short"></i><span>✓</span></div>
+            </div>
+            <div class="project__body">
+              <span class="project__kicker" data-i18n="proj.lms.kicker">Proyecto académico</span>
+              <h3 data-i18n="proj.lms.title">Plataforma educativa tipo Moodle</h3>
+              <p data-i18n="proj.lms.desc">Sistema construido desde cero con gestión de cuestionarios y roles de alumno y profesor, implementado tanto en Laravel como en Django.</p>
+              <div class="chips"><span>PHP</span><span>Laravel</span><span>Python</span><span>Django</span></div>
+            </div>
+          </article>
+
+          <article class="project reveal" data-tags="web">
+            <div class="project__media"><img src="assets/img/project-portfolio.png" alt="Captura del portfolio anterior" loading="lazy" /></div>
+            <div class="project__body">
+              <span class="project__kicker" data-i18n="proj.port.kicker">Proyecto personal</span>
+              <h3 data-i18n="proj.port.title">Portfolio en React</h3>
+              <p data-i18n="proj.port.desc">Mi portfolio anterior, publicado en Netlify, con React, TailwindCSS y Motion, multidioma y con un minijuego de memoria.</p>
+              <div class="chips"><span>React</span><span>Tailwind</span><span>Motion</span></div>
+              <a class="project__link" href="https://gitlab.com/personal-projects4020123/myportfolio" target="_blank" rel="noopener"><span data-i18n="proj.view">Ver repositorio</span> →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">04</span>
+          <h2 data-i18n="skills.title">Stack técnico</h2>
+        </header>
+
+        <div class="skills">
+          <div class="skill-group reveal">
+            <h3><span class="sg-icon">{ }</span> Backend</h3>
+            <ul class="skill-list">
+              <li><span>Java</span><span class="level" style="--l:90%"></span></li>
+              <li><span>Spring Boot</span><span class="level" style="--l:70%"></span></li>
+              <li><span>JDBC</span><span class="level" style="--l:85%"></span></li>
+              <li><span>Hibernate</span><span class="level" style="--l:65%"></span></li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3><span class="sg-icon">⛁</span> <span data-i18n="skills.db">Bases de datos</span></h3>
+            <ul class="skill-list">
+              <li><span>SQL</span><span class="level" style="--l:88%"></span></li>
+              <li><span>SQL Server</span><span class="level" style="--l:85%"></span></li>
+              <li><span>MongoDB</span><span class="level" style="--l:50%"></span></li>
+            </ul>
+          </div>
+          <div class="skill-group reveal">
+            <h3><span class="sg-icon">⚙</span> <span data-i18n="skills.tools">Herramientas</span></h3>
+            <div class="chips chips--lg"><span>Git</span><span>SVN</span><span>JasperReports</span><span>SCRUM</span><span>CI</span><span>Claude (IA)</span></div>
+          </div>
+          <div class="skill-group reveal">
+            <h3><span class="sg-icon">&lt;/&gt;</span> <span data-i18n="skills.other">También trabajo con</span></h3>
+            <div class="chips chips--lg"><span>JavaScript</span><span>React</span><span>Angular</span><span>Python</span><span>C#</span><span>PHP</span><span>Laravel</span><span>Django</span></div>
+          </div>
+          <div class="skill-group skill-group--wide reveal">
+            <h3><span class="sg-icon">🗣</span> <span data-i18n="skills.langs">Idiomas</span></h3>
+            <div class="langs">
+              <div><strong data-i18n="lang.es">Español</strong><span data-i18n="lang.native">Nativo</span></div>
+              <div><strong data-i18n="lang.ca">Catalán</strong><span data-i18n="lang.native">Nativo</span></div>
+              <div><strong data-i18n="lang.en">Inglés</strong><span data-i18n="lang.pro">Competencia profesional</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee__track">
+            <span>Java</span><span>Spring Boot</span><span>SQL Server</span><span>JDBC</span><span>Hibernate</span><span>Git</span><span>JasperReports</span><span>React</span><span>Angular</span><span>Python</span><span>C#</span><span>PHP</span>
+            <span>Java</span><span>Spring Boot</span><span>SQL Server</span><span>JDBC</span><span>Hibernate</span><span>Git</span><span>JasperReports</span><span>React</span><span>Angular</span><span>Python</span><span>C#</span><span>PHP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PLAYGROUND ============ -->
+    <section class="section" id="playground">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">05</span>
+          <h2 data-i18n="play.title">Playground y datos</h2>
+        </header>
+        <div class="play reveal">
+          <div class="play__info">
+            <p data-i18n="play.desc">Un guiño a mi lado de desarrollador de videojuegos: encuentra las parejas del stack con el menor número de movimientos.</p>
+            <div class="play__stats">
+              <div><span data-i18n="play.moves">Movimientos</span><strong id="moves">0</strong></div>
+              <div><span data-i18n="play.time">Tiempo</span><strong id="timer">0s</strong></div>
+              <div><span data-i18n="play.best">Récord</span><strong id="best">—</strong></div>
+            </div>
+            <button class="btn btn--ghost" id="restart" type="button" data-i18n="play.restart">Reiniciar</button>
+            <p class="play__win" id="win" role="status" aria-live="polite"></p>
+          </div>
+          <div class="memory" id="memory" aria-label="Juego de memoria"></div>
+        </div>
+
+        <!-- Panel con datos reales: Netlify Functions (API REST) + Netlify Database (PostgreSQL) -->
+        <div class="live reveal" id="live">
+          <header class="live__head">
+            <div>
+              <h3 data-i18n="live.title">Datos en vivo</h3>
+              <p class="muted" data-i18n="live.sub">Este panel no es decorativo: lee y escribe en una base de datos PostgreSQL a través de una API REST propia (Netlify Functions).</p>
+            </div>
+            <span class="live__badge" id="live-badge"><span class="pulse"></span><span id="live-source">PostgreSQL · Netlify Database</span></span>
+          </header>
+
+          <div class="live__grid">
+            <div class="live__tiles">
+              <div class="tile"><span data-i18n="live.visits">Visitas totales</span><strong id="lv-total">—</strong></div>
+              <div class="tile"><span data-i18n="live.today">Visitas hoy</span><strong id="lv-today">—</strong></div>
+              <div class="tile"><span data-i18n="live.games">Partidas jugadas</span><strong id="lv-games">—</strong></div>
+              <div class="tile tile--chart">
+                <span data-i18n="live.chart">Visitas · últimos 14 días</span>
+                <svg id="lv-chart" viewBox="0 0 280 70" preserveAspectRatio="none" role="img" aria-label="Gráfico de visitas"></svg>
+              </div>
+            </div>
+
+            <div class="ranking">
+              <div class="ranking__head">
+                <h4 data-i18n="live.ranking">Ranking global · Memory</h4>
+                <span class="mono muted" data-i18n="live.rank_hint">menos movimientos gana</span>
+              </div>
+              <ol class="ranking__list" id="lv-ranking"><li class="ranking__empty" data-i18n="live.loading">Cargando…</li></ol>
+              <form class="sign" id="lv-sign" hidden>
+                <p id="lv-sign-msg"></p>
+                <div class="sign__row">
+                  <input id="lv-name" name="name" maxlength="16" minlength="2" required autocomplete="nickname" placeholder="Tu nombre" data-i18n-placeholder="live.name_ph" />
+                  <button class="btn btn--primary" type="submit" data-i18n="live.save">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="api-log" aria-label="Peticiones a la API">
+            <div class="api-log__bar"><span class="mono">API</span><span class="muted mono" data-i18n="live.log">últimas peticiones</span></div>
+            <ol id="lv-log" class="mono"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section class="section section--contact" id="contacto">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__num">06</span>
+          <h2 data-i18n="contact.title">Hablemos</h2>
+        </header>
+        <div class="contact">
+          <div class="contact__info reveal">
+            <p class="contact__lead" data-i18n="contact.lead">¿Tienes un proyecto o una oferta en la que encaje? Escríbeme y te respondo lo antes posible.</p>
+            <div class="contact__cards">
+              <button class="ccard" type="button" id="copy-email" data-email="joseluiscanrull@gmail.com">
+                <span class="ccard__icon"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                <span><small>Email</small>joseluiscanrull@gmail.com</span>
+                <em class="ccard__hint" data-i18n="contact.copy">Copiar</em>
+              </button>
+              <a class="ccard" href="https://www.linkedin.com/in/joseluisfernandezsolis/" target="_blank" rel="noopener">
+                <span class="ccard__icon"><svg viewBox="0 0 24 24" width="20" height="20" class="fill"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></span>
+                <span><small>LinkedIn</small>in/joseluisfernandezsolis</span>
+                <em class="ccard__hint">↗</em>
+              </a>
+              <div class="ccard ccard--static">
+                <span class="ccard__icon"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+                <span><small data-i18n="contact.loc">Ubicación</small>Sabadell, Barcelona</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden><label>No rellenar: <input name="bot-field" /></label></p>
+            <div class="field">
+              <input id="f-name" name="name" type="text" placeholder=" " required autocomplete="name" />
+              <label for="f-name" data-i18n="form.name">Nombre</label>
+            </div>
+            <div class="field">
+              <input id="f-email" name="email" type="email" placeholder=" " required autocomplete="email" />
+              <label for="f-email" data-i18n="form.email">Email</label>
+            </div>
+            <div class="field">
+              <textarea id="f-msg" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="f-msg" data-i18n="form.msg">Mensaje</label>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit" data-i18n="form.send">Enviar mensaje</button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> José Luis Fernández Solís</p>
+      <p class="mono muted" data-i18n="footer.made">Hecho a mano con HTML, CSS y JavaScript</p>
+      <a href="#inicio" class="to-top" aria-label="Volver arriba">↑</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/live.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
