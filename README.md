@@ -1,6 +1,6 @@
 # Portfolio · José Luis Fernández
 
-Sitio estático (HTML + CSS + JavaScript) + API REST con **Netlify Functions** + **Netlify Database (PostgreSQL)**.
+Sitio estático (HTML + CSS + JavaScript) + API REST con **Netlify Functions** + **Netlify Blobs** (almacenamiento persistente incluido en todos los planes de Netlify).
 
 ## Qué hay
 | Ruta | Qué es |
@@ -11,7 +11,7 @@ Sitio estático (HTML + CSS + JavaScript) + API REST con **Netlify Functions** +
 | `js/cv-game.js` | Juego 3D con Three.js (se carga solo al abrir el modo 3D) |
 | `js/live.js` | Panel «Datos en vivo»: estadísticas, ranking global y log de la API |
 | `netlify/functions/` | API: `GET/POST /api/stats`, `GET/POST/PATCH /api/games` |
-| `netlify/database/migrations/` | Esquema SQL (se aplica solo en cada deploy) |
+| `netlify/lib/store.mjs` | Acceso a Netlify Blobs: visitas por día y partidas del ranking |
 
 ## Ver en local
 Abre la carpeta con cualquier servidor estático. Sin la API, el panel de datos
@@ -24,7 +24,7 @@ npm install
 npx netlify dev
 ```
 
-`netlify dev` levanta un PostgreSQL local automáticamente.
+`netlify dev` simula Netlify Blobs en local automáticamente.
 
 ## Publicar en Netlify
 Las Functions y la base de datos **no funcionan con «arrastrar y soltar»**: hay que desplegar desde Git o con la CLI.
@@ -32,10 +32,9 @@ Las Functions y la base de datos **no funcionan con «arrastrar y soltar»**: ha
 1. Sube esta carpeta a un repositorio (GitLab/GitHub).
 2. En Netlify: *Add new project → Import from Git* → elige el repo.
    Build command vacío, publish directory `.` (ya está en `netlify.toml`).
-3. En el proyecto: **Data & Storage → Database → Create a database**.
-4. Vuelve a desplegar: Netlify crea la base de datos y aplica `0001_initial.sql`.
+3. Despliega. Netlify Blobs no necesita configuración: el almacén `portfolio` se crea solo
+   (se ve en **Data & Storage → Blobs**).
 
-Plan gratuito (credit-based): 5 GB de almacenamiento y cómputo limitado; de sobra para esto.
 Opcional: variable de entorno `IP_SALT` con un texto aleatorio (para el hash anti-abuso).
 
 ## Editar contenido

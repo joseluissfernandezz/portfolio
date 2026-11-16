@@ -1,5 +1,5 @@
-import { getDatabase } from '@netlify/database';
 import { json, error, timed } from '../lib/http.mjs';
+import { store, today, readVisits, readGames } from '../lib/store.mjs';
 
 /**
  * GET  /api/stats  → estadísticas públicas del portfolio
@@ -7,36 +7,38 @@ import { json, error, timed } from '../lib/http.mjs';
  */
 export default async (req) => {
   if (req.method !== 'GET' && req.method !== 'POST') return error(405, 'Method not allowed');
-  const { sql } = getDatabase();
 
   try {
     const [data, dbMs] = await timed(async () => {
+      const s = store();
+      const visits = await readVisits(s);
+
       if (req.method === 'POST') {
-        await sql`
-          INSERT INTO visits (day, count) VALUES (CURRENT_DATE, 1)
-          ON CONFLICT (day) DO UPDATE SET count = visits.count + 1`;
+        visits[today()] = (visits[today()] || 0) + 1;
+        // Conserva ~13 meses de histórico
+        const cutoff = new Date(Date.now() - 400 * 864e5).toISOString().slice(0, 10);
+        for (const day of Object.keys(visits)) if (day < cutoff) delete visits[day];
+        await s.setJSON('visits', visits);
       }
 
-      const [totals] = await sql`
-        SELECT
-          (SELECT COALESCE(SUM(count), 0)::int FROM visits)                          AS visits_total,
-          (SELECT COALESCE(MAX(count), 0)::int FROM visits WHERE day = CURRENT_DATE) AS visits_today,
-          (SELECT COUNT(*)::int FROM games)                                          AS games_total`;
-
-      // Serie de los últimos 14 días, incluidos los días sin visitas
-      const series = await sql`
-        SELECT to_char(d.day, 'YYYY-MM-DD') AS day, COALESCE(v.count, 0)::int AS count
-        FROM generate_series((CURRENT_DATE - 13)::timestamp, CURRENT_DATE::timestamp, interval '1 day') AS d(day)
-        LEFT JOIN visits v ON v.day = d.day::date
-        ORDER BY d.day`;
-
-      return { ...totals, series };
+      const games = await readGames(s);
+      const series = [];
+      for (let i = 13; i >= 0; i--) {
+        const day = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
+        series.push({ day, count: visits[day] || 0 });
+      }
+      return {
+        visits_total: Object.values(visits).reduce((a, b) => a + b, 0),
+        visits_today: visits[today()] || 0,
+        games_total: games.total,
+        series
+      };
     });
 
     return json(data, { dbMs });
   } catch (e) {
     console.error(e);
-    return error(500, 'Database error');
+    return error(500, 'Storage error');
   }
 };
 

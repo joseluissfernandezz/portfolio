@@ -94,7 +94,7 @@ window.I18N_EN = {
 
   "play.title": "Playground & live data",
   "live.title": "Live data",
-  "live.sub": "This panel isn't decorative: it reads from and writes to a PostgreSQL database through my own REST API (Netlify Functions).",
+  "live.sub": "This panel isn't decorative: it reads and writes real data through my own REST API (Netlify Functions + Netlify Blobs), with server-side validation and abuse limits.",
   "live.visits": "Total visits",
   "live.today": "Visits today",
   "live.games": "Games played",

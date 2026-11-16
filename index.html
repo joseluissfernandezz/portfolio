@@ -406,14 +406,14 @@
           <div class="memory" id="memory" aria-label="Juego de memoria"></div>
         </div>
 
-        <!-- Panel con datos reales: Netlify Functions (API REST) + Netlify Database (PostgreSQL) -->
+        <!-- Panel con datos reales: Netlify Functions (API REST) + Netlify Blobs (almacenamiento persistente) -->
         <div class="live reveal" id="live">
           <header class="live__head">
             <div>
               <h3 data-i18n="live.title">Datos en vivo</h3>
-              <p class="muted" data-i18n="live.sub">Este panel no es decorativo: lee y escribe en una base de datos PostgreSQL a través de una API REST propia (Netlify Functions).</p>
+              <p class="muted" data-i18n="live.sub">Este panel no es decorativo: lee y escribe datos reales a través de una API REST propia (Netlify Functions + Netlify Blobs), con validación en servidor y límite anti-abuso.</p>
             </div>
-            <span class="live__badge" id="live-badge"><span class="pulse"></span><span id="live-source">PostgreSQL · Netlify Database</span></span>
+            <span class="live__badge" id="live-badge"><span class="pulse"></span><span id="live-source">API REST · Netlify Blobs</span></span>
           </header>
 
           <div class="live__grid">

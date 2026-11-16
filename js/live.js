@@ -1,5 +1,5 @@
 /* Panel "Datos en vivo".
-   En Netlify habla con la API (/api/stats, /api/games) que usa PostgreSQL.
+   En Netlify habla con la API (/api/stats, /api/games) que guarda en Netlify Blobs.
    En local, sin API, funciona en "modo demo" guardando en localStorage. */
 window.Live = (() => {
   'use strict';
@@ -89,7 +89,7 @@ window.Live = (() => {
     renderSource();
   }
   function renderSource() {
-    $('#live-source').textContent = demo ? t('live.demo') : 'PostgreSQL · Netlify Database';
+    $('#live-source').textContent = demo ? t('live.demo') : 'API REST · Netlify Blobs';
   }
 
   /* ---------- Render ---------- */

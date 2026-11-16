@@ -6,7 +6,7 @@ export function json(body, { status = 200, dbMs } = {}) {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store'
   };
-  if (dbMs != null) headers['Server-Timing'] = `db;desc="PostgreSQL";dur=${dbMs.toFixed(1)}`;
+  if (dbMs != null) headers['Server-Timing'] = `db;desc="Netlify Blobs";dur=${dbMs.toFixed(1)}`;
   return new Response(JSON.stringify(body), { status, headers });
 }
 

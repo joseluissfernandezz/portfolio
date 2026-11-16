@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import { getDatabase } from '@netlify/database';
 import { json, error, timed, ipHash, readJson } from '../lib/http.mjs';
+import { store, readGames, top10, prune } from '../lib/store.mjs';
 
 /**
  * API REST del ranking del juego de memoria
@@ -12,20 +12,13 @@ const PAIRS = 8;
 const NAME_RE = /^[\p{L}\p{N} ._-]{2,16}$/u;
 const MAX_GAMES_PER_10_MIN = 10;
 
-const top10 = sql => sql`
-  SELECT name, moves, seconds, to_char(created_at, 'YYYY-MM-DD') AS day
-  FROM games
-  WHERE name IS NOT NULL
-  ORDER BY moves, seconds, created_at
-  LIMIT 10`;
-
 export default async (req, context) => {
-  const { sql } = getDatabase();
-
   try {
+    const s = store();
+
     if (req.method === 'GET') {
-      const [rows, dbMs] = await timed(() => top10(sql));
-      return json({ ranking: rows }, { dbMs });
+      const [ranking, dbMs] = await timed(async () => top10(await readGames(s)));
+      return json({ ranking }, { dbMs });
     }
 
     if (req.method === 'POST') {
@@ -37,20 +30,18 @@ export default async (req, context) => {
 
       const ip = ipHash(context);
       const [result, dbMs] = await timed(async () => {
-        const [{ recent }] = await sql`
-          SELECT COUNT(*)::int AS recent FROM games
-          WHERE ip_hash = ${ip} AND created_at > now() - interval '10 minutes'`;
+        const db = await readGames(s);
+        const now = Date.now();
+        const recent = db.games.filter(g => g.ip === ip && now - g.at < 10 * 60e3).length;
         if (recent >= MAX_GAMES_PER_10_MIN) return null;
 
-        const token = randomUUID();
-        const [row] = await sql`
-          INSERT INTO games (moves, seconds, claim_token, ip_hash)
-          VALUES (${moves}, ${seconds}, ${token}, ${ip})
-          RETURNING id`;
-        const [{ rank }] = await sql`
-          SELECT COUNT(*)::int + 1 AS rank FROM games
-          WHERE name IS NOT NULL AND (moves < ${moves} OR (moves = ${moves} AND seconds < ${seconds}))`;
-        return { id: row.id, token, rank };
+        const game = { id: ++db.seq, name: null, moves, seconds, token: randomUUID(), ip, at: now };
+        db.games.push(game);
+        db.total++;
+        await s.setJSON('games', prune(db));
+
+        const rank = db.games.filter(g => g.name && (g.moves < moves || (g.moves === moves && g.seconds < seconds))).length + 1;
+        return { id: game.id, token: game.token, rank };
       });
 
       if (!result) return error(429, 'Too many games, try again later');
@@ -66,13 +57,12 @@ export default async (req, context) => {
       if (!NAME_RE.test(name)) return error(400, 'Invalid name');
 
       const [result, dbMs] = await timed(async () => {
-        const updated = await sql`
-          UPDATE games SET name = ${name}
-          WHERE id = ${id} AND claim_token = ${token}::uuid AND name IS NULL
-            AND created_at > now() - interval '30 minutes'
-          RETURNING id`;
-        if (!updated.length) return null;
-        return { ranking: await top10(sql) };
+        const db = await readGames(s);
+        const game = db.games.find(g => g.id === id && g.token === token && !g.name && Date.now() - g.at < 30 * 60e3);
+        if (!game) return null;
+        game.name = name;
+        await s.setJSON('games', prune(db));
+        return { ranking: top10(db) };
       });
 
       if (!result) return error(404, 'Game not found or already signed');
@@ -82,7 +72,7 @@ export default async (req, context) => {
     return error(405, 'Method not allowed');
   } catch (e) {
     console.error(e);
-    return error(500, 'Database error');
+    return error(500, 'Storage error');
   }
 };
 
